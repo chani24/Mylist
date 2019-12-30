@@ -44,7 +44,7 @@ e =>{
 
     //add new task to UI 
     
-    markup = `<li class="list-group-item d-flex justify-content-between align-items-center list-group-item-info" id="${id}">
+    markup = `<li class="list-group-item d-flex justify-content-between align-items-center " id="${id}">
    ${newTask}
    <button class="btn btn-info btn-group-sm" type='button'>Done</button></li>
    `;
