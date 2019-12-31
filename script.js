@@ -1,4 +1,4 @@
-
+//object containing dom strings
 const domStrings = {
   button: '.btn',
   input: '#input1',
@@ -10,16 +10,19 @@ let data = [];
 //when page loads
 
 window.addEventListener('load', () => {
-
+//get user's nickname
 let userCheck = function (){
-  if(localStorage.getItem('user') === "null"){
-    let userNickname = prompt("What's your nickname");
-    if(userNickname !== ""){
+  if(localStorage.getItem('user') === "null" || localStorage.getItem('user') === null ){
+    var userNickname = prompt("Hi, i'm your Todo list. What nickname can i call you ?");
+    if(userNickname){
       localStorage.setItem('user', userNickname);
       document.querySelector(domStrings.userBadge).textContent = `Welcome, ${userNickname}`;
+   }
+   else{document.querySelector(domStrings.userBadge).textContent = `Welcome, user`;}
    
-    }
-  }else {document.querySelector(domStrings.userBadge).textContent = `Welcome, ${localStorage.getItem('user')}`;}
+  }
+  else
+  {document.querySelector(domStrings.userBadge).textContent = `Welcome, ${localStorage.getItem('user')}`;}
 }();
 
 
@@ -35,8 +38,7 @@ let userCheck = function (){
   //render existing tasks 
   data.forEach(e => {
     let markup;
-    console.log(e);
-    markup = `<li class="list-group-item d-flex justify-content-between align-items-center     " id="${e.id}">
+    markup = `<li class="list-group-item d-flex justify-content-between align-items-center" id="${e.id}">
    ${e.task}
    <button class="btn btn-info btn-group-sm" type='button'>Done</button></li>
    `;
@@ -44,7 +46,6 @@ let userCheck = function (){
    document.querySelector(domStrings.list).insertAdjacentHTML('beforeend', markup);
   })
 });
-
 
 //function that generates id 
 var ID = function () {
@@ -54,9 +55,7 @@ var ID = function () {
     return '_' + Math.random().toString(36).substr(2, 9);
   };
 
-  
-
-  // constructor object for tasks  
+// constructor object for tasks  
 
   const TaskStorage = function(id, task){
     this.id = id;
