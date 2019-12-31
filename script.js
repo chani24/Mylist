@@ -4,8 +4,33 @@ const domStrings = {
   input: '#input1',
   list: '.list-section'
 };
+//array of data
+let data = [];
+//when page loads
 
-const data = [];
+window.addEventListener('load', () => {
+ 
+  /// read from local storage
+  let readStorage = function(){
+    const storage = JSON.parse(localStorage.getItem('tasks'));
+    //restore from local storage
+    if(storage)  data = storage;
+  };
+  readStorage();
+  
+  //render existing tasks 
+  data.forEach(e => {
+    let markup;
+    console.log(e);
+    markup = `<li class="list-group-item d-flex justify-content-between align-items-center     " id="${e.id}">
+   ${e.task}
+   <button class="btn btn-info btn-group-sm" type='button'>Done</button></li>
+   `;
+
+   document.querySelector(domStrings.list).insertAdjacentHTML('beforeend', markup);
+  })
+});
+
 
 //function that generates id 
 var ID = function () {
@@ -44,7 +69,7 @@ e =>{
 
     //add new task to UI 
     
-    markup = `<li class="list-group-item d-flex justify-content-between align-items-center " id="${id}">
+    markup = `<li class="list-group-item d-flex justify-content-between align-items-center     " id="${id}">
    ${newTask}
    <button class="btn btn-info btn-group-sm" type='button'>Done</button></li>
    `;
@@ -53,6 +78,9 @@ e =>{
 
    //empty input field
     document.querySelector(domStrings.input).value = '';
+
+    //persist with local storage
+    persistentStorage();
   }
 
 }
@@ -75,11 +103,20 @@ document.querySelector(domStrings.list).addEventListener('click', e => {
           if (index !== -1) {
             data.splice(index, 1);
           }
+  //persist with local storage
+  persistentStorage();
+
 
   // remove from ui
   if(id){
    e.target.parentNode.parentNode.removeChild(e.target.parentNode);
   }
 })
+
+let persistentStorage = function(){
+localStorage.setItem('tasks', JSON.stringify(data));
+};
+
+
 
 
