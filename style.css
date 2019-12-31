@@ -1,6 +1,11 @@
 body{
     background-color: black;
 }
-.container{
-    background-color: rgb(29, 32, 32);
+.user-badge{
+    color:#3ABCA7
+}
+.header{
+    font-family: 'Pacifico', cursive;
+         font-size: xx-large;
+         color:#3ABCA7;
 }
