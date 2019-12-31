@@ -2,13 +2,27 @@
 const domStrings = {
   button: '.btn',
   input: '#input1',
-  list: '.list-section'
+  list: '.list-section',
+  userBadge: '.user-badge'
 };
 //array of data
 let data = [];
 //when page loads
 
 window.addEventListener('load', () => {
+
+let userCheck = function (){
+  if(localStorage.getItem('user') === "null"){
+    let userNickname = prompt("What's your nickname");
+    if(userNickname !== ""){
+      localStorage.setItem('user', userNickname);
+      document.querySelector(domStrings.userBadge).textContent = `Welcome, ${userNickname}`;
+   
+    }
+  }else {document.querySelector(domStrings.userBadge).textContent = `Welcome, ${localStorage.getItem('user')}`;}
+}();
+
+
  
   /// read from local storage
   let readStorage = function(){
